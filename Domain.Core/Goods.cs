@@ -1,6 +1,6 @@
 ﻿namespace Domain.Core
 {
-    public class Item
+    public class Goods
     {
         public int ID { get; set; }
 

@@ -14,7 +14,7 @@ namespace Infrastructure.Data
 
         private ClientRepository ClientRepository;
 
-        private ItemRepository ItemRepository;
+        private GoodsRepository ItemRepository;
 
         private OrderRepository OrderRepository;
 
@@ -35,13 +35,13 @@ namespace Infrastructure.Data
             }
         }
 
-        public IRepository<Item> Item
+        public IRepository<Goods> Goods
         {
             get
             {
                 if (ItemRepository == null)
                 {
-                    ItemRepository = new ItemRepository(database);
+                    ItemRepository = new GoodsRepository(database);
                 }
                 return ItemRepository;
             }

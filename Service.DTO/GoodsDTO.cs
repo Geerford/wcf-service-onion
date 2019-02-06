@@ -3,7 +3,7 @@
 namespace Service.DTO
 {
     [DataContract]
-    public class ItemDTO
+    public class GoodsDTO
     {
         [DataMember]
         public int ID { get; set; }

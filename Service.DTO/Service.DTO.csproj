@@ -42,10 +42,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CartDTO.cs" />
     <Compile Include="ClientDTO.cs" />
-    <Compile Include="ItemDTO.cs" />
+    <Compile Include="GoodsDTO.cs" />
     <Compile Include="OrderDTO.cs" />
+    <Compile Include="OrderItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Domain.Core\Domain.Core.csproj">
+      <Project>{778F7DB8-2F43-4CBA-B9BA-856F33D53268}</Project>
+      <Name>Domain.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

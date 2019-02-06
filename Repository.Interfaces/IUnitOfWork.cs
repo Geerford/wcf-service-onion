@@ -8,7 +8,7 @@ namespace Repository.Interfaces
     {
         IRepository<Client> Client { get; }
 
-        IRepository<Item> Item { get; }
+        IRepository<Goods> Goods { get; }
 
         IRepository<Order> Order { get; }
 

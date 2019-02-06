@@ -5,25 +5,25 @@ using System.Collections.Generic;
 
 namespace Service.Business.Service
 {
-    public class ItemService : IService<Item>
+    public class GoodsService : IService<Goods>
     {
         IUnitOfWork Database { get; set; }
 
-        public ItemService(IUnitOfWork uow)
+        public GoodsService(IUnitOfWork uow)
         {
             Database = uow;
         }
         
-        public Item Create(Item item)
+        public Goods Create(Goods item)
         {
-            Database.Item.Create(item);
+            Database.Goods.Create(item);
             Database.Save();
             return item;
         }
 
-        public Item Delete(Item item)
+        public Goods Delete(Goods item)
         {
-            Database.Item.Delete(item.ID);
+            Database.Goods.Delete(item.ID);
             Database.Save();
             return item;
         }
@@ -33,20 +33,20 @@ namespace Service.Business.Service
             Database.Dispose();
         }
 
-        public Item Edit(Item item)
+        public Goods Edit(Goods item)
         {
-            Database.Item.Update(item);
+            Database.Goods.Update(item);
             Database.Save();
             return item;
         }
 
-        public Item Get(int? id)
+        public Goods Get(int? id)
         {
             if (id == null)
             {
                 throw new ValidationException("Не задан ID", "");
             }
-            Item item = Database.Item.Get(id.Value);
+            Goods item = Database.Goods.Get(id.Value);
             if (item == null)
             {
                 throw new ValidationException("Сущность не найдена", "");
@@ -54,9 +54,9 @@ namespace Service.Business.Service
             return item;
         }
 
-        public IEnumerable<Item> GetAll()
+        public IEnumerable<Goods> GetAll()
         {
-            return Database.Item.GetAll();
+            return Database.Goods.GetAll();
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Domain.Core
+﻿using System;
+
+namespace Domain.Core
 {
     public class Order
     {
@@ -7,6 +9,8 @@
         public int ClientID { get; set; }
 
         public int ItemID { get; set; }
+
+        public DateTime Date { get; set; }
 
         public int Count { get; set; }
     }

@@ -7,7 +7,7 @@ namespace Infrastructure.Data
     {
         public DbSet<Client> Client { get; set; }
 
-        public DbSet<Item> Item { get; set; }
+        public DbSet<Goods> Goods { get; set; }
 
         public DbSet<Order> Order { get; set; }
 

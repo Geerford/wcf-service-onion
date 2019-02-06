@@ -1,4 +1,5 @@
 ﻿using Domain.Core;
+using System;
 using System.Data.Entity;
 
 namespace Infrastructure.Data
@@ -47,102 +48,113 @@ namespace Infrastructure.Data
                 Name = "Philip",
                 Surname = "Lombard"
             });
-            database.Item.Add(new Item
+            database.Goods.Add(new Goods
             {
-                Title = "Item №1",
-                Type = "Type №1"
+                Title = "Lamb",
+                Type = "Meat"
             });
-            database.Item.Add(new Item
+            database.Goods.Add(new Goods
             {
-                Title = "Item №2",
-                Type = "Type №2"
+                Title = "Coffee",
+                Type = "Drink"
             });
-            database.Item.Add(new Item
+            database.Goods.Add(new Goods
             {
-                Title = "Item №3",
-                Type = "Type №3"
+                Title = "Bread",
+                Type = "Flour"
             });
-            database.Item.Add(new Item
+            database.Goods.Add(new Goods
             {
-                Title = "Item №4",
-                Type = "Type №4"
+                Title = "Shortcake",
+                Type = "Flour"
             });
-            database.Item.Add(new Item
+            database.Goods.Add(new Goods
             {
-                Title = "Item №5",
-                Type = "Type №5"
+                Title = "Mackerel",
+                Type = "Fish"
             });
-            database.Item.Add(new Item
+            database.Goods.Add(new Goods
             {
-                Title = "Item №6",
-                Type = "Type №6"
+                Title = "Cheddar",
+                Type = "Cheese"
             });
             database.SaveChanges();
             database.Order.Add(new Order
             {
                 ClientID = 1,
                 ItemID = 1,
-                Count = 2
+                Count = 2,
+                Date = DateTime.Now
             });
             database.Order.Add(new Order
             {
                 ClientID = 1,
                 ItemID = 2,
-                Count = 1
+                Count = 1,
+                Date = DateTime.Now
             });
             database.Order.Add(new Order
             {
                 ClientID = 1,
                 ItemID = 3,
-                Count = 3
+                Count = 3,
+                Date = DateTime.Now
             });
             database.Order.Add(new Order
             {
                 ClientID = 1,
                 ItemID = 4,
-                Count = 1
+                Count = 1,
+                Date = DateTime.Now
             });
             database.Order.Add(new Order
             {
                 ClientID = 3,
                 ItemID = 6,
-                Count = 1
+                Count = 1,
+                Date = DateTime.Now
             });
             database.Order.Add(new Order
             {
                 ClientID = 2,
                 ItemID = 5,
-                Count = 1
+                Count = 1,
+                Date = DateTime.Now
             });
             database.Order.Add(new Order
             {
                 ClientID = 2,
                 ItemID = 4,
-                Count = 6
+                Count = 6,
+                Date = DateTime.Now
             });
             database.Order.Add(new Order
             {
                 ClientID = 2,
                 ItemID = 1,
-                Count = 5
+                Count = 5,
+                Date = DateTime.Now
             });
             database.Order.Add(new Order
             {
                 ClientID = 4,
                 ItemID = 4,
-                Count = 2
+                Count = 2,
+                Date = DateTime.Now
             });
             database.Order.Add(new Order
             {
                 ClientID = 5,
                 ItemID = 2,
-                Count = 1
+                Count = 1,
+                Date = DateTime.Now
             });
             database.Order.Add(new Order
             {
                 ClientID = 6,
                 ItemID = 3,
-                Count = 1
+                Count = 1,
+                Date = DateTime.Now
             });
             database.SaveChanges();
         }
