@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Service.DTO" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Service.DTO" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:11825/WcfService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Domain.Core" />
+  <xs:complexType name="ArrayOfClientDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ClientDTO" nillable="true" type="tns:ClientDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfClientDTO" nillable="true" type="tns:ArrayOfClientDTO" />
+  <xs:complexType name="ClientDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Midname" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Surname" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ClientDTO" nillable="true" type="tns:ClientDTO" />
+  <xs:complexType name="CartDTO">
+    <xs:sequence>
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Domain.Core" minOccurs="0" name="Client" nillable="true" type="q1:Client" />
+      <xs:element minOccurs="0" name="Items" nillable="true" type="tns:ArrayOfOrderItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CartDTO" nillable="true" type="tns:CartDTO" />
+  <xs:complexType name="ArrayOfOrderItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OrderItem" nillable="true" type="tns:OrderItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOrderItem" nillable="true" type="tns:ArrayOfOrderItem" />
+  <xs:complexType name="OrderItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Count" type="xs:int" />
+      <xs:element minOccurs="0" name="Date" type="xs:dateTime" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Domain.Core" minOccurs="0" name="Item" nillable="true" type="q2:Goods" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrderItem" nillable="true" type="tns:OrderItem" />
+  <xs:complexType name="ArrayOfGoodsDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="GoodsDTO" nillable="true" type="tns:GoodsDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfGoodsDTO" nillable="true" type="tns:ArrayOfGoodsDTO" />
+  <xs:complexType name="GoodsDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Type" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GoodsDTO" nillable="true" type="tns:GoodsDTO" />
+  <xs:complexType name="ResponseHitsModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="GetByClientRequest" type="xs:int" />
+      <xs:element minOccurs="0" name="GetClientRequest" type="xs:int" />
+      <xs:element minOccurs="0" name="GetGoodsRequest" type="xs:int" />
+      <xs:element minOccurs="0" name="GetOrdersRequest" type="xs:int" />
+      <xs:element minOccurs="0" name="TotalRequest" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResponseHitsModel" nillable="true" type="tns:ResponseHitsModel" />
+</xs:schema>
