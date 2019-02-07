@@ -4,13 +4,22 @@ using System.ServiceModel;
 
 namespace WcfService
 {
-    [ServiceContract]
+    [ServiceContract()]
     public interface IWcfService
     {
         [OperationContract]
         IEnumerable<ClientDTO> GetClients();
 
         [OperationContract]
-        IEnumerable<ClientDTO> GetOrders(int clientID);
+        CartDTO GetByClient(int clientID);
+
+        [OperationContract]
+        IEnumerable<GoodsDTO> GetGoods();
+
+        [OperationContract]
+        IEnumerable<OrderItem> GetOrdersGroup();
+
+        [OperationContract]
+        ResponseHitsModel TotalHits();
     }
 }
