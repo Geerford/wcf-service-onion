@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="b011f204-6e3e-4932-9295-b6f9e96c0bd7" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="21e1a1a5-bc50-43b9-8edd-223562beacbc" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,9 +22,9 @@
     <MetadataSource Address="http://localhost/WCF.Service/Queue/WcfQueueRequest.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="WcfQueueRequest.xsd" MetadataType="Schema" ID="2774afe3-7fbd-4a89-932a-abb5ba7b684f" SourceId="1" SourceUrl="http://localhost/WCF.Service/Queue/WcfQueueRequest.svc?xsd=xsd0" />
-    <MetadataFile FileName="WcfQueueRequest.disco" MetadataType="Disco" ID="bf6d13bb-213f-4e7b-9f6f-02000a125c40" SourceId="1" SourceUrl="http://localhost/WCF.Service/Queue/WcfQueueRequest.svc?disco" />
-    <MetadataFile FileName="WcfQueueRequest.wsdl" MetadataType="Wsdl" ID="a4930840-746d-462c-b06d-23090b0d5f8a" SourceId="1" SourceUrl="http://localhost/WCF.Service/Queue/WcfQueueRequest.svc?wsdl" />
+    <MetadataFile FileName="WcfQueueRequest.xsd" MetadataType="Schema" ID="a185af37-097a-4721-a85b-afccd55488b5" SourceId="1" SourceUrl="http://localhost/WCF.Service/Queue/WcfQueueRequest.svc?xsd=xsd0" />
+    <MetadataFile FileName="WcfQueueRequest.disco" MetadataType="Disco" ID="5d79db59-cdc8-4e2b-9258-a58cebb37678" SourceId="1" SourceUrl="http://localhost/WCF.Service/Queue/WcfQueueRequest.svc?disco" />
+    <MetadataFile FileName="WcfQueueRequest.wsdl" MetadataType="Wsdl" ID="913f7d8c-bc9f-4580-b4db-0068f1834f0c" SourceId="1" SourceUrl="http://localhost/WCF.Service/Queue/WcfQueueRequest.svc?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

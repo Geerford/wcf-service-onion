@@ -15,21 +15,19 @@ namespace WCF.WindowsForms.Services
         private readonly Lazy<WcfServiceClient> client;
         private readonly Lazy<WcfQueueRequestClient> queue;
         private readonly List<CustomerDTO> customersFromQueue;
-        private readonly List<GoodsDTO> goodsFromQueue;
         private readonly Action<RequestModel> updateCountCallback;
-        private readonly Action<IEnumerable<CustomerDTO>, IEnumerable<GoodsDTO>> queueResponseCallback;
+        private readonly Action<IEnumerable<CustomerDTO>> queueResponseCallback;
         private ServiceHost host;
 
-        public ClientService(Action<RequestModel> updateCountCallback, Action<IEnumerable<CustomerDTO>, IEnumerable<GoodsDTO>> queueResponseCallback)
+        public ClientService(Action<RequestModel> updateCountCallback, Action<IEnumerable<CustomerDTO>> queueResponseCallback)
         {
             client = new Lazy<WcfServiceClient>(CreateClient);
             queue = new Lazy<WcfQueueRequestClient>(() => new WcfQueueRequestClient());
             customersFromQueue = new List<CustomerDTO>();
-            goodsFromQueue = new List<GoodsDTO>();
             this.updateCountCallback = updateCountCallback;
             this.queueResponseCallback = queueResponseCallback;
         }
-        
+
         public void Initalize()
         {
             var handler = new QueueResponseHandler(AddCustomers);
@@ -40,7 +38,7 @@ namespace WCF.WindowsForms.Services
         private void AddCustomers(IEnumerable<CustomerDTO> customers)
         {
             customersFromQueue.AddRange(customers);
-            queueResponseCallback?.Invoke(customersFromQueue, goodsFromQueue);
+            queueResponseCallback?.Invoke(customersFromQueue);
         }
 
         public async Task<IEnumerable<CustomerDTO>> GetCustomersAsync()
@@ -56,7 +54,6 @@ namespace WCF.WindowsForms.Services
         public async Task SendRequestAsync()
         {
             customersFromQueue.Clear();
-            goodsFromQueue.Clear();
             await queue.Value.SendCustomersRequestAsync();
         }
 

@@ -4,7 +4,6 @@
     <wsp:ExactlyOne>
       <wsp:All>
         <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
-        <msmq:MsmqBestEffort xmlns:msmq="http://schemas.microsoft.com/ws/06/2004/mspolicy/msmq" />
         <wsaw:UsingAddressing />
       </wsp:All>
     </wsp:ExactlyOne>
@@ -46,9 +45,9 @@
   </wsdl:binding>
   <wsdl:service name="WcfQueueRequest">
     <wsdl:port name="NetMsmqBinding_IWcfQueueRequest" binding="tns:NetMsmqBinding_IWcfQueueRequest">
-      <soap12:address location="net.msmq://localhost/private/clientqueuerequest" />
+      <soap12:address location="net.msmq://localhost/private/wcfqueuerequest" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.msmq://localhost/private/clientqueuerequest</wsa10:Address>
+        <wsa10:Address>net.msmq://localhost/private/wcfqueuerequest</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>

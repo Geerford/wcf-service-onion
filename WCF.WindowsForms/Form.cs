@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Text;
 using WCF.WindowsForms.Services;
-using WCF.WindowsForms.ServiceReference;
 using System.Collections.Generic;
 using Service.DTO;
 using System.ComponentModel;
@@ -21,7 +20,7 @@ namespace WCF.WindowsForms
 
         private void InitializeHost()
         {
-            service = new ClientService(UpdateClientCount, (customers, goods) => FillRichTextBox("Request from queue", customers, goods));
+            service = new ClientService(UpdateClientCount, (customers) => FillRichTextBox("Request from queue", customers));
             service.Initalize();
         }
 

@@ -11,10 +11,9 @@ namespace WCF.WindowsForms.Handler
         private readonly Action<IEnumerable<CustomerDTO>> customersCallback;
         private readonly Action<IEnumerable<GoodsDTO>> goodsCallback;
 
-        public QueueResponseHandler(Action<IEnumerable<CustomerDTO>> customersCallback, Action<IEnumerable<GoodsDTO>> goodsCallback)
+        public QueueResponseHandler(Action<IEnumerable<CustomerDTO>> customersCallback)
         {
             this.customersCallback = customersCallback;
-            this.goodsCallback = goodsCallback;
         }
 
         public void ReceiveCustomers(IEnumerable<CustomerDTO> customers)
