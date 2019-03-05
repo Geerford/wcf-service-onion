@@ -1,6 +1,6 @@
 ﻿namespace Domain.Core
 {
-    public class Client
+    public class Customer
     {
         public int ID { get; set; }
 

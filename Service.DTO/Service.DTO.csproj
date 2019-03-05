@@ -43,12 +43,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CartDTO.cs" />
-    <Compile Include="ClientDTO.cs" />
+    <Compile Include="CustomerDTO.cs" />
     <Compile Include="GoodsDTO.cs" />
     <Compile Include="OrderDTO.cs" />
     <Compile Include="OrderItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ResponseHitsModel.cs" />
+    <Compile Include="RequestModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Domain.Core\Domain.Core.csproj">

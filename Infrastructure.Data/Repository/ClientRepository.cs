@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Infrastructure.Data.Repository
 {
-    public class ClientRepository : IRepository<Client>
+    public class ClientRepository : IRepository<Customer>
     {
         private Context database;
 
@@ -16,15 +16,15 @@ namespace Infrastructure.Data.Repository
             database = context;
         }
 
-        public Client Create(Client item)
+        public Customer Create(Customer item)
         {
             database.Client.Add(item);
             return item;
         }
 
-        public Client Delete(int id)
+        public Customer Delete(int id)
         {
-            Client item = database.Client.Find(id);
+            Customer item = database.Client.Find(id);
             if (item != null)
             {
                 database.Client.Remove(item);
@@ -32,27 +32,27 @@ namespace Infrastructure.Data.Repository
             return item;
         }
 
-        public IEnumerable<Client> Find(Func<Client, bool> predicate)
+        public IEnumerable<Customer> Find(Func<Customer, bool> predicate)
         {
             return database.Client.Where(predicate);
         }
 
-        public Client FindFirst(Func<Client, bool> predicate)
+        public Customer FindFirst(Func<Customer, bool> predicate)
         {
             return database.Client.Where(predicate).First();
         }
 
-        public Client Get(int id)
+        public Customer Get(int id)
         {
             return database.Client.Find(id);
         }
 
-        public IEnumerable<Client> GetAll()
+        public IEnumerable<Customer> GetAll()
         {
             return database.Client;
         }
 
-        public Client Update(Client item)
+        public Customer Update(Customer item)
         {
             database.Entry(item).State = EntityState.Modified;
             return item;

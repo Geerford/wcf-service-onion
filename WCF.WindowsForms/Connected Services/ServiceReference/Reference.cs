@@ -12,38 +12,27 @@ namespace WCF.WindowsForms.ServiceReference {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference.IWcfService")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference.IWcfService", CallbackContract=typeof(WCF.WindowsForms.ServiceReference.IWcfServiceCallback))]
     public interface IWcfService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWcfService/GetClients", ReplyAction="http://tempuri.org/IWcfService/GetClientsResponse")]
-        Service.DTO.ClientDTO[] GetClients();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWcfService/GetCustomers", ReplyAction="http://tempuri.org/IWcfService/GetCustomersResponse")]
+        Service.DTO.CustomerDTO[] GetCustomers();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWcfService/GetClients", ReplyAction="http://tempuri.org/IWcfService/GetClientsResponse")]
-        System.Threading.Tasks.Task<Service.DTO.ClientDTO[]> GetClientsAsync();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWcfService/GetByClient", ReplyAction="http://tempuri.org/IWcfService/GetByClientResponse")]
-        Service.DTO.CartDTO GetByClient(int clientID);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWcfService/GetByClient", ReplyAction="http://tempuri.org/IWcfService/GetByClientResponse")]
-        System.Threading.Tasks.Task<Service.DTO.CartDTO> GetByClientAsync(int clientID);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWcfService/GetCustomers", ReplyAction="http://tempuri.org/IWcfService/GetCustomersResponse")]
+        System.Threading.Tasks.Task<Service.DTO.CustomerDTO[]> GetCustomersAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWcfService/GetGoods", ReplyAction="http://tempuri.org/IWcfService/GetGoodsResponse")]
         Service.DTO.GoodsDTO[] GetGoods();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWcfService/GetGoods", ReplyAction="http://tempuri.org/IWcfService/GetGoodsResponse")]
         System.Threading.Tasks.Task<Service.DTO.GoodsDTO[]> GetGoodsAsync();
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IWcfServiceCallback {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWcfService/GetOrdersGroup", ReplyAction="http://tempuri.org/IWcfService/GetOrdersGroupResponse")]
-        Service.DTO.OrderItem[] GetOrdersGroup();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWcfService/GetOrdersGroup", ReplyAction="http://tempuri.org/IWcfService/GetOrdersGroupResponse")]
-        System.Threading.Tasks.Task<Service.DTO.OrderItem[]> GetOrdersGroupAsync();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWcfService/TotalHits", ReplyAction="http://tempuri.org/IWcfService/TotalHitsResponse")]
-        Service.DTO.ResponseHitsModel TotalHits();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWcfService/TotalHits", ReplyAction="http://tempuri.org/IWcfService/TotalHitsResponse")]
-        System.Threading.Tasks.Task<Service.DTO.ResponseHitsModel> TotalHitsAsync();
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IWcfService/ShowRequestCount")]
+        void ShowRequestCount(Service.DTO.RequestModel count);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -52,41 +41,34 @@ namespace WCF.WindowsForms.ServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class WcfServiceClient : System.ServiceModel.ClientBase<WCF.WindowsForms.ServiceReference.IWcfService>, WCF.WindowsForms.ServiceReference.IWcfService {
+    public partial class WcfServiceClient : System.ServiceModel.DuplexClientBase<WCF.WindowsForms.ServiceReference.IWcfService>, WCF.WindowsForms.ServiceReference.IWcfService {
         
-        public WcfServiceClient() {
+        public WcfServiceClient(System.ServiceModel.InstanceContext callbackInstance) : 
+                base(callbackInstance) {
         }
         
-        public WcfServiceClient(string endpointConfigurationName) : 
-                base(endpointConfigurationName) {
+        public WcfServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
+                base(callbackInstance, endpointConfigurationName) {
         }
         
-        public WcfServiceClient(string endpointConfigurationName, string remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
+        public WcfServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
         }
         
-        public WcfServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
+        public WcfServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
         }
         
-        public WcfServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(binding, remoteAddress) {
+        public WcfServiceClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, binding, remoteAddress) {
         }
         
-        public Service.DTO.ClientDTO[] GetClients() {
-            return base.Channel.GetClients();
+        public Service.DTO.CustomerDTO[] GetCustomers() {
+            return base.Channel.GetCustomers();
         }
         
-        public System.Threading.Tasks.Task<Service.DTO.ClientDTO[]> GetClientsAsync() {
-            return base.Channel.GetClientsAsync();
-        }
-        
-        public Service.DTO.CartDTO GetByClient(int clientID) {
-            return base.Channel.GetByClient(clientID);
-        }
-        
-        public System.Threading.Tasks.Task<Service.DTO.CartDTO> GetByClientAsync(int clientID) {
-            return base.Channel.GetByClientAsync(clientID);
+        public System.Threading.Tasks.Task<Service.DTO.CustomerDTO[]> GetCustomersAsync() {
+            return base.Channel.GetCustomersAsync();
         }
         
         public Service.DTO.GoodsDTO[] GetGoods() {
@@ -95,22 +77,6 @@ namespace WCF.WindowsForms.ServiceReference {
         
         public System.Threading.Tasks.Task<Service.DTO.GoodsDTO[]> GetGoodsAsync() {
             return base.Channel.GetGoodsAsync();
-        }
-        
-        public Service.DTO.OrderItem[] GetOrdersGroup() {
-            return base.Channel.GetOrdersGroup();
-        }
-        
-        public System.Threading.Tasks.Task<Service.DTO.OrderItem[]> GetOrdersGroupAsync() {
-            return base.Channel.GetOrdersGroupAsync();
-        }
-        
-        public Service.DTO.ResponseHitsModel TotalHits() {
-            return base.Channel.TotalHits();
-        }
-        
-        public System.Threading.Tasks.Task<Service.DTO.ResponseHitsModel> TotalHitsAsync() {
-            return base.Channel.TotalHitsAsync();
         }
     }
 }

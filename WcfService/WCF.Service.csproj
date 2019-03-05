@@ -15,7 +15,7 @@
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -49,6 +49,7 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -68,16 +69,24 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="WcfService.svc" />
+    <Content Include="Queue\WcfQueueRequest.svc" />
+    <Content Include="Service\WcfService.svc" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="WcfService.svc.cs">
+    <Compile Include="Callback\IRequestCounter.cs" />
+    <Compile Include="Queue\IWcfQueueRequest.cs" />
+    <Compile Include="Queue\IWcfQueueResponse.cs" />
+    <Compile Include="Queue\WcfQueueRequest.svc.cs">
+      <DependentUpon>WcfQueueRequest.svc</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceBase.cs" />
+    <Compile Include="Service\WcfService.svc.cs">
       <DependentUpon>WcfService.svc</DependentUpon>
     </Compile>
-    <Compile Include="IWcfService.cs" />
+    <Compile Include="Service\IWcfService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -131,7 +140,9 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>11825</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:11825/</IISUrl>
+          <IISUrl>http://localhost/WCF.Service</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost:11825/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

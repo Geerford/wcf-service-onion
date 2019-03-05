@@ -1,94 +1,118 @@
 ﻿using System;
 using System.Linq;
 using System.Text;
+using WCF.WindowsForms.Services;
 using WCF.WindowsForms.ServiceReference;
+using System.Collections.Generic;
+using Service.DTO;
+using System.ComponentModel;
 
 namespace WCF.WindowsForms
 {
     public partial class Form : System.Windows.Forms.Form
     {
-        private WcfServiceClient clientService;
+        private ClientService service;
 
         public Form()
         {
             InitializeComponent();
+            InitializeHost();
         }
 
-        private void buttonGetClients_Click(object sender, EventArgs e)
+        private void InitializeHost()
         {
-            clientService = new WcfServiceClient();
+            service = new ClientService(UpdateClientCount, (customers, goods) => FillRichTextBox("Request from queue", customers, goods));
+            service.Initalize();
+        }
+
+        private void UpdateClientCount(RequestModel counter)
+        {
+            Invoke((Action)(() => labelClient.Text = $"Current clients: {counter.TotalRequest}"));
+        }
+
+        private void FillRichTextBox(string source, IEnumerable<CustomerDTO> customers)
+        {
             var builder = new StringBuilder();
-            foreach (var client in clientService.GetClients())
+            builder.AppendLine(source);
+            foreach (var customer in customers)
             {
-                builder.AppendFormat($"№{client.ID}: {client.Name} {client.Surname} {client.Midname}\n");
-                var cart = clientService.GetByClient(client.ID);
-                if(cart.Items.ToList().Count > 0)
+                builder.AppendFormat($"№{customer.ID}: {customer.Name} {customer.Surname} {customer.Midname}\n");
+                if (customer.Cart.Items.ToList().Count > 0)
                 {
                     builder.AppendFormat("Orders:\nTitle | Type | Date | Quantity\n");
                 }
-                foreach (var item in cart.Items)
+                foreach (var item in customer.Cart.Items)
                 {
                     builder.AppendFormat($"* {item.Item.Title} - {item.Item.Type} - {item.Date} - {item.Count}\n");
                 }
                 builder.Append("\n");
             }
-            richTextBox.Text = builder.ToString();
-            clientService.Close();
+            Invoke((Action)(() => richTextBox.Text += builder.ToString()));
         }
 
-        private void buttonGetItems_Click(object sender, EventArgs e)
+        private void FillRichTextBox(string source, IEnumerable<CustomerDTO> customers, IEnumerable<GoodsDTO> goods)
         {
-            clientService = new WcfServiceClient();
             var builder = new StringBuilder();
+            builder.AppendLine(source);
+            foreach (var customer in customers)
+            {
+                builder.AppendFormat($"№{customer.ID}: {customer.Name} {customer.Surname} {customer.Midname}\n");
+                if (customer.Cart.Items.ToList().Count > 0)
+                {
+                    builder.AppendFormat("Orders:\nTitle | Type | Date | Quantity\n");
+                }
+                foreach (var item in customer.Cart.Items)
+                {
+                    builder.AppendFormat($"* {item.Item.Title} - {item.Item.Type} - {item.Date} - {item.Count}\n");
+                }
+                builder.Append("\n");
+            }
+            builder.AppendLine(source);
             builder.AppendFormat("ID | Title | Type\n");
-            foreach (var item in clientService.GetGoods())
+            foreach (var item in goods)
             {
                 builder.AppendFormat($"№{item.ID}: {item.Title} - {item.Type}\n\n");
             }
-            richTextBox.Text = builder.ToString();
-            clientService.Close();
+            Invoke((Action)(() => richTextBox.Text += builder.ToString()));
         }
 
-        private void buttonGetOrderGroup_Click(object sender, EventArgs e)
+        private void FillRichTextBox(string source, IEnumerable<GoodsDTO> goods)
         {
-            clientService = new WcfServiceClient();
             var builder = new StringBuilder();
-            builder.AppendFormat("ID | Title | Type | Quantity\n");
-            foreach (var item in clientService.GetOrdersGroup())
+            builder.AppendLine(source);
+            builder.AppendFormat("ID | Title | Type\n");
+            foreach (var item in goods)
             {
-                builder.AppendFormat($"№{item.Item.ID}: {item.Item.Title} - {item.Item.Type} - {item.Count}\n\n");
+                builder.AppendFormat($"№{item.ID}: {item.Title} - {item.Type}\n\n");
             }
-            richTextBox.Text = builder.ToString();
-            clientService.Close();
+            Invoke((Action)(() => richTextBox.Text += builder.ToString()));
+        }
+
+        private async void buttonGetClients_Click(object sender, EventArgs e)
+        {
+            var customers = await service.GetCustomersAsync().ConfigureAwait(false);
+            FillRichTextBox("Direct request", customers);
+        }
+
+        private async void buttonGetItems_Click(object sender, EventArgs e)
+        {
+            var goods = await service.GetGoodsAsync().ConfigureAwait(false);
+            FillRichTextBox("Direct request", goods);
         }
 
         private async void buttonAsync_ClickAsync(object sender, EventArgs e)
         {
-            clientService = new WcfServiceClient();
-            var result = await clientService.GetGoodsAsync();
-            var builder = new StringBuilder();
-            builder.AppendFormat("ID | Title | Type\n");
-            foreach (var item in result)
-            {
-                builder.AppendFormat($"№{item.ID}: {item.Title} - {item.Type}\n\n");
-            }
-            richTextBox.Text = builder.ToString();
-            clientService.Close();
+            await service.SendRequestAsync();
         }
 
         private void buttonGetHits_Click(object sender, EventArgs e)
         {
-            clientService = new WcfServiceClient();
-            var builder = new StringBuilder();
-            var result = clientService.TotalHits();
-            builder.AppendFormat("Total requests:\n");
-            builder.AppendFormat($"'GetClients' - {result.GetClientsRequest}\n");
-            builder.AppendFormat($"'GetByClient' - {result.GetByClientRequest}\n");
-            builder.AppendFormat($"'GetGoods' - {result.GetGoodsRequest}\n");
-            builder.AppendFormat($"'GetOrders' - {result.GetOrdersRequest}\n");
-            builder.AppendFormat($"'Total Requests' - {result.TotalRequest}\n");
-            richTextBox.Text = builder.ToString();
-            clientService.Close();
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            service.Dispose();
+            base.OnClosing(e);
         }
     }
 }

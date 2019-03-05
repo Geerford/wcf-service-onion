@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="WcfService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
-  <wsp:Policy wsu:Id="WSHttpBinding_IWcfService_policy">
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="WcfService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IWcfService_policy">
     <wsp:ExactlyOne>
       <wsp:All>
+        <wsrm:RMAssertion xmlns:wsrm="http://schemas.xmlsoap.org/ws/2005/02/rm/policy">
+          <wsrm:InactivityTimeout Milliseconds="600000" />
+          <wsrm:AcknowledgementInterval Milliseconds="200" />
+        </wsrm:RMAssertion>
         <sp:SymmetricBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
           <wsp:Policy>
             <sp:ProtectionToken>
@@ -14,6 +18,7 @@
                       <wsp:Policy>
                         <sp:SignedParts>
                           <sp:Body />
+                          <sp:Header Name="ChannelInstance" Namespace="http://schemas.microsoft.com/ws/2005/02/duplex" />
                           <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
                           <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
                           <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
@@ -92,15 +97,21 @@
             <sp:RequireServerEntropy />
           </wsp:Policy>
         </sp:Trust10>
+        <cdp:CompositeDuplex xmlns:cdp="http://schemas.microsoft.com/net/2006/06/duplex" />
+        <ow:OneWay xmlns:ow="http://schemas.microsoft.com/ws/2005/05/routing/policy" />
         <wsaw:UsingAddressing />
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_IWcfService_GetClients_Input_policy">
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IWcfService_GetCustomers_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
           <sp:Body />
+          <sp:Header Name="Sequence" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="SequenceAcknowledgement" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="AckRequested" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="ChannelInstance" Namespace="http://schemas.microsoft.com/ws/2005/02/duplex" />
           <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
           <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
           <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
@@ -115,11 +126,15 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_IWcfService_GetClients_output_policy">
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IWcfService_GetCustomers_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
           <sp:Body />
+          <sp:Header Name="Sequence" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="SequenceAcknowledgement" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="AckRequested" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="ChannelInstance" Namespace="http://schemas.microsoft.com/ws/2005/02/duplex" />
           <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
           <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
           <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
@@ -134,11 +149,15 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_IWcfService_GetByClient_Input_policy">
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IWcfService_GetGoods_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
           <sp:Body />
+          <sp:Header Name="Sequence" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="SequenceAcknowledgement" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="AckRequested" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="ChannelInstance" Namespace="http://schemas.microsoft.com/ws/2005/02/duplex" />
           <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
           <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
           <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
@@ -153,11 +172,15 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_IWcfService_GetByClient_output_policy">
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IWcfService_GetGoods_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
           <sp:Body />
+          <sp:Header Name="Sequence" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="SequenceAcknowledgement" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="AckRequested" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="ChannelInstance" Namespace="http://schemas.microsoft.com/ws/2005/02/duplex" />
           <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
           <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
           <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
@@ -172,106 +195,15 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_IWcfService_GetGoods_Input_policy">
+  <wsp:Policy wsu:Id="WSDualHttpBinding_IWcfService_ShowRequestCount_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
           <sp:Body />
-          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
-        </sp:SignedParts>
-        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <sp:Body />
-        </sp:EncryptedParts>
-      </wsp:All>
-    </wsp:ExactlyOne>
-  </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_IWcfService_GetGoods_output_policy">
-    <wsp:ExactlyOne>
-      <wsp:All>
-        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <sp:Body />
-          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
-        </sp:SignedParts>
-        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <sp:Body />
-        </sp:EncryptedParts>
-      </wsp:All>
-    </wsp:ExactlyOne>
-  </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_IWcfService_GetOrdersGroup_Input_policy">
-    <wsp:ExactlyOne>
-      <wsp:All>
-        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <sp:Body />
-          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
-        </sp:SignedParts>
-        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <sp:Body />
-        </sp:EncryptedParts>
-      </wsp:All>
-    </wsp:ExactlyOne>
-  </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_IWcfService_GetOrdersGroup_output_policy">
-    <wsp:ExactlyOne>
-      <wsp:All>
-        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <sp:Body />
-          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
-        </sp:SignedParts>
-        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <sp:Body />
-        </sp:EncryptedParts>
-      </wsp:All>
-    </wsp:ExactlyOne>
-  </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_IWcfService_TotalHits_Input_policy">
-    <wsp:ExactlyOne>
-      <wsp:All>
-        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <sp:Body />
-          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
-        </sp:SignedParts>
-        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <sp:Body />
-        </sp:EncryptedParts>
-      </wsp:All>
-    </wsp:ExactlyOne>
-  </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_IWcfService_TotalHits_output_policy">
-    <wsp:ExactlyOne>
-      <wsp:All>
-        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <sp:Body />
+          <sp:Header Name="Sequence" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="SequenceAcknowledgement" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="AckRequested" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+          <sp:Header Name="ChannelInstance" Namespace="http://schemas.microsoft.com/ws/2005/02/duplex" />
           <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
           <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
           <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
@@ -288,23 +220,17 @@
   </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
-      <xsd:import schemaLocation="http://localhost:11825/WcfService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
-      <xsd:import schemaLocation="http://localhost:11825/WcfService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://localhost:11825/WcfService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Service.DTO" />
-      <xsd:import schemaLocation="http://localhost:11825/WcfService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Domain.Core" />
+      <xsd:import schemaLocation="http://localhost/WCF.Service/Service/WcfService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost/WCF.Service/Service/WcfService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost/WCF.Service/Service/WcfService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Service.DTO" />
+      <xsd:import schemaLocation="http://localhost/WCF.Service/Service/WcfService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Domain.Core" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IWcfService_GetClients_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetClients" />
+  <wsdl:message name="IWcfService_GetCustomers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCustomers" />
   </wsdl:message>
-  <wsdl:message name="IWcfService_GetClients_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetClientsResponse" />
-  </wsdl:message>
-  <wsdl:message name="IWcfService_GetByClient_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetByClient" />
-  </wsdl:message>
-  <wsdl:message name="IWcfService_GetByClient_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetByClientResponse" />
+  <wsdl:message name="IWcfService_GetCustomers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCustomersResponse" />
   </wsdl:message>
   <wsdl:message name="IWcfService_GetGoods_InputMessage">
     <wsdl:part name="parameters" element="tns:GetGoods" />
@@ -312,106 +238,62 @@
   <wsdl:message name="IWcfService_GetGoods_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetGoodsResponse" />
   </wsdl:message>
-  <wsdl:message name="IWcfService_GetOrdersGroup_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetOrdersGroup" />
-  </wsdl:message>
-  <wsdl:message name="IWcfService_GetOrdersGroup_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetOrdersGroupResponse" />
-  </wsdl:message>
-  <wsdl:message name="IWcfService_TotalHits_InputMessage">
-    <wsdl:part name="parameters" element="tns:TotalHits" />
-  </wsdl:message>
-  <wsdl:message name="IWcfService_TotalHits_OutputMessage">
-    <wsdl:part name="parameters" element="tns:TotalHitsResponse" />
+  <wsdl:message name="IWcfService_ShowRequestCount_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ShowRequestCount" />
   </wsdl:message>
   <wsdl:portType name="IWcfService">
-    <wsdl:operation name="GetClients">
-      <wsdl:input wsaw:Action="http://tempuri.org/IWcfService/GetClients" message="tns:IWcfService_GetClients_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IWcfService/GetClientsResponse" message="tns:IWcfService_GetClients_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="GetByClient">
-      <wsdl:input wsaw:Action="http://tempuri.org/IWcfService/GetByClient" message="tns:IWcfService_GetByClient_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IWcfService/GetByClientResponse" message="tns:IWcfService_GetByClient_OutputMessage" />
+    <wsdl:operation name="GetCustomers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWcfService/GetCustomers" message="tns:IWcfService_GetCustomers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWcfService/GetCustomersResponse" message="tns:IWcfService_GetCustomers_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetGoods">
       <wsdl:input wsaw:Action="http://tempuri.org/IWcfService/GetGoods" message="tns:IWcfService_GetGoods_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IWcfService/GetGoodsResponse" message="tns:IWcfService_GetGoods_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetOrdersGroup">
-      <wsdl:input wsaw:Action="http://tempuri.org/IWcfService/GetOrdersGroup" message="tns:IWcfService_GetOrdersGroup_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IWcfService/GetOrdersGroupResponse" message="tns:IWcfService_GetOrdersGroup_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="TotalHits">
-      <wsdl:input wsaw:Action="http://tempuri.org/IWcfService/TotalHits" message="tns:IWcfService_TotalHits_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IWcfService/TotalHitsResponse" message="tns:IWcfService_TotalHits_OutputMessage" />
+    <wsdl:operation name="ShowRequestCount">
+      <wsdl:output wsaw:Action="http://tempuri.org/IWcfService/ShowRequestCount" message="tns:IWcfService_ShowRequestCount_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:binding name="WSHttpBinding_IWcfService" type="tns:IWcfService">
-    <wsp:PolicyReference URI="#WSHttpBinding_IWcfService_policy" />
+  <wsdl:binding name="WSDualHttpBinding_IWcfService" type="tns:IWcfService">
+    <wsp:PolicyReference URI="#WSDualHttpBinding_IWcfService_policy" />
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="GetClients">
-      <soap12:operation soapAction="http://tempuri.org/IWcfService/GetClients" style="document" />
+    <wsdl:operation name="GetCustomers">
+      <soap12:operation soapAction="http://tempuri.org/IWcfService/GetCustomers" style="document" />
       <wsdl:input>
-        <wsp:PolicyReference URI="#WSHttpBinding_IWcfService_GetClients_Input_policy" />
+        <wsp:PolicyReference URI="#WSDualHttpBinding_IWcfService_GetCustomers_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <wsp:PolicyReference URI="#WSHttpBinding_IWcfService_GetClients_output_policy" />
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetByClient">
-      <soap12:operation soapAction="http://tempuri.org/IWcfService/GetByClient" style="document" />
-      <wsdl:input>
-        <wsp:PolicyReference URI="#WSHttpBinding_IWcfService_GetByClient_Input_policy" />
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <wsp:PolicyReference URI="#WSHttpBinding_IWcfService_GetByClient_output_policy" />
+        <wsp:PolicyReference URI="#WSDualHttpBinding_IWcfService_GetCustomers_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetGoods">
       <soap12:operation soapAction="http://tempuri.org/IWcfService/GetGoods" style="document" />
       <wsdl:input>
-        <wsp:PolicyReference URI="#WSHttpBinding_IWcfService_GetGoods_Input_policy" />
+        <wsp:PolicyReference URI="#WSDualHttpBinding_IWcfService_GetGoods_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <wsp:PolicyReference URI="#WSHttpBinding_IWcfService_GetGoods_output_policy" />
+        <wsp:PolicyReference URI="#WSDualHttpBinding_IWcfService_GetGoods_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetOrdersGroup">
-      <soap12:operation soapAction="http://tempuri.org/IWcfService/GetOrdersGroup" style="document" />
-      <wsdl:input>
-        <wsp:PolicyReference URI="#WSHttpBinding_IWcfService_GetOrdersGroup_Input_policy" />
-        <soap12:body use="literal" />
-      </wsdl:input>
+    <wsdl:operation name="ShowRequestCount">
+      <soap12:operation soapAction="http://tempuri.org/IWcfService/ShowRequestCount" style="document" />
       <wsdl:output>
-        <wsp:PolicyReference URI="#WSHttpBinding_IWcfService_GetOrdersGroup_output_policy" />
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="TotalHits">
-      <soap12:operation soapAction="http://tempuri.org/IWcfService/TotalHits" style="document" />
-      <wsdl:input>
-        <wsp:PolicyReference URI="#WSHttpBinding_IWcfService_TotalHits_Input_policy" />
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <wsp:PolicyReference URI="#WSHttpBinding_IWcfService_TotalHits_output_policy" />
+        <wsp:PolicyReference URI="#WSDualHttpBinding_IWcfService_ShowRequestCount_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="WcfService">
-    <wsdl:port name="WSHttpBinding_IWcfService" binding="tns:WSHttpBinding_IWcfService">
-      <soap12:address location="http://localhost:11825/WcfService.svc" />
+    <wsdl:port name="WSDualHttpBinding_IWcfService" binding="tns:WSDualHttpBinding_IWcfService">
+      <soap12:address location="http://localhost/WCF.Service/Service/WcfService.svc" />
       <wsa10:EndpointReference>
-        <wsa10:Address>http://localhost:11825/WcfService.svc</wsa10:Address>
+        <wsa10:Address>http://localhost/WCF.Service/Service/WcfService.svc</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>NEVERFORD\nevdev</Upn>
+          <Spn>host/Neverford</Spn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

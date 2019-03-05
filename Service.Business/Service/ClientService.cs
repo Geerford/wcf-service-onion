@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Service.Business.Service
 {
-    public class ClientService : IService<Client>
+    public class ClientService : IService<Customer>
     {
         IUnitOfWork Database { get; set; }
 
@@ -14,14 +14,14 @@ namespace Service.Business.Service
             Database = uow;
         }
 
-        public Client Create(Client item)
+        public Customer Create(Customer item)
         {
             Database.Client.Create(item);
             Database.Save();
             return item;
         }
 
-        public Client Delete(Client item)
+        public Customer Delete(Customer item)
         {
             Database.Client.Delete(item.ID);
             Database.Save();
@@ -33,20 +33,20 @@ namespace Service.Business.Service
             Database.Dispose();
         }
 
-        public Client Edit(Client item)
+        public Customer Edit(Customer item)
         {
             Database.Client.Update(item);
             Database.Save();
             return item;
         }
 
-        public Client Get(int? id)
+        public Customer Get(int? id)
         {
             if (id == null)
             {
                 throw new ValidationException("Не задан ID", "");
             }
-            Client item = Database.Client.Get(id.Value);
+            Customer item = Database.Client.Get(id.Value);
             if (item == null)
             {
                 throw new ValidationException("Сущность не найдена", "");
@@ -54,7 +54,7 @@ namespace Service.Business.Service
             return item;
         }
 
-        public IEnumerable<Client> GetAll()
+        public IEnumerable<Customer> GetAll()
         {
             return Database.Client.GetAll();
         }

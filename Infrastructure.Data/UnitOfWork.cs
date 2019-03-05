@@ -23,7 +23,7 @@ namespace Infrastructure.Data
             database = new Context(connectionString);
         }
 
-        public IRepository<Client> Client
+        public IRepository<Customer> Client
         {
             get
             {

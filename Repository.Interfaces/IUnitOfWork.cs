@@ -6,7 +6,7 @@ namespace Repository.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {
-        IRepository<Client> Client { get; }
+        IRepository<Customer> Client { get; }
 
         IRepository<Goods> Goods { get; }
 

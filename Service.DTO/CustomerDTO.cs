@@ -3,7 +3,7 @@
 namespace Service.DTO
 {
     [DataContract]
-    public class ClientDTO
+    public class CustomerDTO
     {
         [DataMember]
         public int ID { get; set; }
@@ -16,5 +16,8 @@ namespace Service.DTO
 
         [DataMember]
         public string Midname { get; set; }
+
+        [DataMember]
+        public CartDTO Cart { get; set; }
     }
 }

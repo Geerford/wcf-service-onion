@@ -5,7 +5,7 @@ namespace Infrastructure.Data
 {
     public class Context : DbContext
     {
-        public DbSet<Client> Client { get; set; }
+        public DbSet<Customer> Client { get; set; }
 
         public DbSet<Goods> Goods { get; set; }
 

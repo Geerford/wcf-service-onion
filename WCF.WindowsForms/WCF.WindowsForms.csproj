@@ -49,6 +49,12 @@
     <Reference Include="WcfService, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Callback\RequestCounter.cs" />
+    <Compile Include="Connected Services\QueueReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\ServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -60,8 +66,11 @@
     <Compile Include="Form.Designer.cs">
       <DependentUpon>Form.cs</DependentUpon>
     </Compile>
+    <Compile Include="Handler\IWcfQueueResponse.cs" />
+    <Compile Include="Handler\QueueResponseHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ClientService.cs" />
     <EmbeddedResource Include="Form.resx">
       <DependentUpon>Form.cs</DependentUpon>
     </EmbeddedResource>
@@ -74,6 +83,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="Connected Services\QueueReference\WcfQueueRequest.wsdl" />
+    <None Include="Connected Services\QueueReference\WcfQueueRequest.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\ServiceReference\WcfService.wsdl" />
     <None Include="Connected Services\ServiceReference\WcfService.xsd">
       <SubType>Designer</SubType>
@@ -89,6 +102,7 @@
     </None>
     <None Include="Properties\DataSources\Service.DTO.CartDTO.datasource" />
     <None Include="Properties\DataSources\Service.DTO.ClientDTO.datasource" />
+    <None Include="Properties\DataSources\Service.DTO.CustomerDTO.datasource" />
     <None Include="Properties\DataSources\Service.DTO.GoodsDTO.datasource" />
     <None Include="Properties\DataSources\Service.DTO.OrderItem.datasource" />
     <None Include="Properties\DataSources\Service.DTO.ResponseHitsModel.datasource" />
@@ -114,7 +128,7 @@
       <Name>Domain.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Service.DTO\Service.DTO.csproj">
-      <Project>{ED6270EF-EAAE-486B-851A-593C1602B391}</Project>
+      <Project>{ed6270ef-eaae-486b-851a-593c1602b391}</Project>
       <Name>Service.DTO</Name>
     </ProjectReference>
     <ProjectReference Include="..\WcfService\WCF.Service.csproj">
@@ -126,6 +140,7 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\QueueReference\" />
     <WCFMetadataStorage Include="Connected Services\ServiceReference\" />
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +154,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\ServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\QueueReference\WcfQueueRequest.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\QueueReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\QueueReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\QueueReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

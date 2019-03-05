@@ -76,7 +76,7 @@ namespace Service.Business.Service
             List<OrderDTO> orders = new List<OrderDTO>();
             foreach (var order in Database.Order.GetAll())
             {
-                Client client = Database.Client.Get(order.ClientID);
+                Customer client = Database.Client.Get(order.ClientID);
                 if (client == null)
                 {
                     throw new ValidationException("Сущность не найдена", "");
@@ -97,7 +97,7 @@ namespace Service.Business.Service
             {
                 throw new ValidationException("Не задан ID", "");
             }
-            Client client = Database.Client.Get(clientID.Value);
+            Customer client = Database.Client.Get(clientID.Value);
             if (client == null)
             {
                 throw new ValidationException("Сущность не найдена", "");
@@ -136,7 +136,7 @@ namespace Service.Business.Service
             {
                 throw new ValidationException("Сущность не найдена", "");
             }
-            Client client = Database.Client.Get(order.ClientID);
+            Customer client = Database.Client.Get(order.ClientID);
             if (client == null)
             {
                 throw new ValidationException("Сущность не найдена", "");

@@ -11,7 +11,7 @@ namespace Service.DTO
         public int ID { get; set; }
 
         [DataMember]
-        public Client Client { get; set; }
+        public Customer Client { get; set; }
 
         [DataMember]
         public Goods Item { get; set; }
@@ -22,7 +22,7 @@ namespace Service.DTO
         [DataMember]
         public int Count { get; set; }
 
-        public OrderDTO(Client client, Goods item, Order order)
+        public OrderDTO(Customer client, Goods item, Order order)
         {
             ID = order.ID;
             Client = client;

@@ -8,7 +8,7 @@ namespace Service.DTO
     public class CartDTO
     {
         [DataMember]
-        public Client Client { get; set; }
+        public Customer Client { get; set; }
 
         [DataMember]
         public IEnumerable<OrderItem> Items { get; set; }

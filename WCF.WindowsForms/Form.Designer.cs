@@ -30,12 +30,11 @@
         {
             this.buttonGetClients = new System.Windows.Forms.Button();
             this.panelButton = new System.Windows.Forms.Panel();
-            this.buttonGetHits = new System.Windows.Forms.Button();
             this.buttonAsync = new System.Windows.Forms.Button();
-            this.buttonGetOrderGroup = new System.Windows.Forms.Button();
             this.buttonGetItems = new System.Windows.Forms.Button();
             this.panelPresentation = new System.Windows.Forms.Panel();
             this.richTextBox = new System.Windows.Forms.RichTextBox();
+            this.labelClient = new System.Windows.Forms.Label();
             this.panelButton.SuspendLayout();
             this.panelPresentation.SuspendLayout();
             this.SuspendLayout();
@@ -52,9 +51,8 @@
             // 
             // panelButton
             // 
-            this.panelButton.Controls.Add(this.buttonGetHits);
+            this.panelButton.Controls.Add(this.labelClient);
             this.panelButton.Controls.Add(this.buttonAsync);
-            this.panelButton.Controls.Add(this.buttonGetOrderGroup);
             this.panelButton.Controls.Add(this.buttonGetItems);
             this.panelButton.Controls.Add(this.buttonGetClients);
             this.panelButton.Location = new System.Drawing.Point(690, 9);
@@ -62,35 +60,15 @@
             this.panelButton.Size = new System.Drawing.Size(98, 579);
             this.panelButton.TabIndex = 2;
             // 
-            // buttonGetHits
-            // 
-            this.buttonGetHits.Location = new System.Drawing.Point(3, 166);
-            this.buttonGetHits.Name = "buttonGetHits";
-            this.buttonGetHits.Size = new System.Drawing.Size(92, 34);
-            this.buttonGetHits.TabIndex = 4;
-            this.buttonGetHits.Text = "Get hits";
-            this.buttonGetHits.UseVisualStyleBackColor = true;
-            this.buttonGetHits.Click += new System.EventHandler(this.buttonGetHits_Click);
-            // 
             // buttonAsync
             // 
-            this.buttonAsync.Location = new System.Drawing.Point(3, 126);
+            this.buttonAsync.Location = new System.Drawing.Point(3, 86);
             this.buttonAsync.Name = "buttonAsync";
             this.buttonAsync.Size = new System.Drawing.Size(92, 34);
             this.buttonAsync.TabIndex = 3;
             this.buttonAsync.Text = "Get Async";
             this.buttonAsync.UseVisualStyleBackColor = true;
             this.buttonAsync.Click += new System.EventHandler(this.buttonAsync_ClickAsync);
-            // 
-            // buttonGetOrderGroup
-            // 
-            this.buttonGetOrderGroup.Location = new System.Drawing.Point(3, 86);
-            this.buttonGetOrderGroup.Name = "buttonGetOrderGroup";
-            this.buttonGetOrderGroup.Size = new System.Drawing.Size(92, 34);
-            this.buttonGetOrderGroup.TabIndex = 2;
-            this.buttonGetOrderGroup.Text = "Group orders";
-            this.buttonGetOrderGroup.UseVisualStyleBackColor = true;
-            this.buttonGetOrderGroup.Click += new System.EventHandler(this.buttonGetOrderGroup_Click);
             // 
             // buttonGetItems
             // 
@@ -120,6 +98,15 @@
             this.richTextBox.TabIndex = 0;
             this.richTextBox.Text = "";
             // 
+            // labelClient
+            // 
+            this.labelClient.AutoSize = true;
+            this.labelClient.Location = new System.Drawing.Point(3, 560);
+            this.labelClient.Name = "labelClient";
+            this.labelClient.Size = new System.Drawing.Size(77, 13);
+            this.labelClient.TabIndex = 5;
+            this.labelClient.Text = "Current clients:";
+            // 
             // Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -135,6 +122,7 @@
             this.ShowIcon = false;
             this.Text = "WCT Client";
             this.panelButton.ResumeLayout(false);
+            this.panelButton.PerformLayout();
             this.panelPresentation.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -147,9 +135,8 @@
         private System.Windows.Forms.Panel panelPresentation;
         private System.Windows.Forms.RichTextBox richTextBox;
         private System.Windows.Forms.Button buttonGetItems;
-        private System.Windows.Forms.Button buttonGetOrderGroup;
         private System.Windows.Forms.Button buttonAsync;
-        private System.Windows.Forms.Button buttonGetHits;
+        private System.Windows.Forms.Label labelClient;
     }
 }
 

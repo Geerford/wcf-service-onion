@@ -4,46 +4,46 @@ using System.Data.Entity;
 
 namespace Infrastructure.Data
 {
-    internal class Initializer : DropCreateDatabaseAlways<Context>
+    internal class Initializer : DropCreateDatabaseIfModelChanges<Context>
     {
         protected override void Seed(Context database)
         {
-            database.Client.Add(new Client
+            database.Client.Add(new Customer
             {
                 Name = "Anthony",
                 Surname = "Marston",
                 Midname = "James"
             });
-            database.Client.Add(new Client
+            database.Client.Add(new Customer
             {
                 Name = "Ethel",
                 Surname = "Rogers"
             });
-            database.Client.Add(new Client
+            database.Client.Add(new Customer
             {
                 Name = "John",
                 Surname = "MacArthur",
                 Midname = "Gordon"
             });
-            database.Client.Add(new Client
+            database.Client.Add(new Customer
             {
                 Name = "John",
                 Surname = "Wargrave",
                 Midname = "Lawrence"
             });
-            database.Client.Add(new Client
+            database.Client.Add(new Customer
             {
                 Name = "Edward",
                 Surname = "Armstrong",
                 Midname = "George"
             });
-            database.Client.Add(new Client
+            database.Client.Add(new Customer
             {
                 Name = "William",
                 Surname = "Blore",
                 Midname = "Henry"
             });
-            database.Client.Add(new Client
+            database.Client.Add(new Customer
             {
                 Name = "Philip",
                 Surname = "Lombard"
